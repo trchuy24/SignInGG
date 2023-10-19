@@ -80,7 +80,6 @@ namespace Sign_inWithGGAcc.Controllers
                     picture = ggUser.picture,
                     locale = ggUser.locale,
                 });
-                ;
                 context.SaveChanges();
                 return "OK";
             }

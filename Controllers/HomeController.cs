@@ -23,7 +23,7 @@ namespace Sign_inWithGGAcc.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult HomePage()
         {
             return View();
         }
@@ -32,6 +32,28 @@ namespace Sign_inWithGGAcc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Login(InternalUserModel.InternalUser user)
+        {
+            string t = "Login không thành công";
+            var context = new DBContext();
+            var internalUsers = context.InternalUser.ToList();
+            int id=0;
+            for (int i = 0; i < internalUsers.Count; i++)
+            {
+                if (user.Email == internalUsers[i].Email && InternalUserModel.HashCode(user.Password) == internalUsers[i].HashCode)
+                {
+                    t = "Longin Thành Công";
+                    id =i; 
+                    break;
+                }
+            }
+
+            ViewData["FamilyName"] = internalUsers[id].FamilyName;
+            ViewData["GivenName"] = internalUsers[id].GivenName;
+            ViewData["Result"] = t;
+            return View();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Sign_inWithGGAcc.Models
     public class DBContext : DbContext
     {
         public DbSet<GoogleAuthenModel.GgUserInDB> GoogleUser { get; set; }
+        public DbSet<InternalUserModel.InternalUsertDB> InternalUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
